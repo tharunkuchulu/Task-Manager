@@ -1,0 +1,48 @@
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import Button from '@mui/material/Button';
+import { useState } from "react";
+
+export default function Task() {
+    const [status, setStatus] = useState(false);
+
+    const theme={
+        open: {
+            buttonBg: '#ff4500',
+            buttonText: 'white',
+            inputBg: '#ffffff',
+            inputBorder: '#ccc'
+        },
+        completed: {
+            buttonBg: '#2e8b57',
+            buttonText: 'white',
+            inputBg: '#ffffff',
+            inputBorder: '#ccc'
+        }
+    };
+
+    const currentStatus = status ? theme.open : theme.completed;
+
+
+    return (
+        <Box sx={{ position:'relative', top:'50px' }}>
+            <Typography variant="h4" color="white">Here are your Tasks:</Typography>
+            <Box padding={2} >
+                <Typography variant="h5" color="white">Task 1:  Python Basics</Typography>
+                <Button 
+                    onClick={() => setStatus(!status)}
+                    style={{
+                        padding: '8px 15px',
+                        backgroundColor: currentStatus.buttonBg,
+                        color: currentStatus.buttonText,
+                        border: 'none',
+                        borderRadius: '4px',
+                        cursor: 'pointer'
+                    }}
+                >
+                    {status ? 'open' : 'completed'}
+                </Button>
+            </Box>
+        </Box>
+    );
+}

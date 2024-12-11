@@ -1,0 +1,56 @@
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import { useState } from "react";
+
+export default function Task() {
+    const [status, setStatus] = useState("open");
+
+    const theme = {
+        open: {
+            buttonBg: "#ff4500",
+            buttonText: "white",
+            inputBg: "#ffffff",
+            inputBorder: "#ccc",
+        },
+        completed: {
+            buttonBg: "#2e8b57",
+            buttonText: "white",
+            inputBg: "#ffffff",
+            inputBorder: "#ccc",
+        },
+    };
+
+    const currentStatus = status === "open" ? theme.open : theme.completed;
+
+    return (
+        <Box sx={{ position: "relative", top: "50px" }}>
+            <Typography variant="h4" color="white">
+                Here are your Tasks:
+            </Typography>
+            <Box padding={2}>
+                <Typography variant="h5" color="white">
+                    Task 1: Python Basics
+                </Typography>
+                <Button
+                    onClick={() => {
+                        if (status === "open") {
+                            setStatus("completed");
+                        }
+                    }}
+                    style={{
+                        padding: "8px 15px",
+                        backgroundColor: currentStatus.buttonBg,
+                        color: currentStatus.buttonText,
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: status === "completed" ? "not-allowed" : "pointer",
+                    }}
+                    disabled={status === "completed"} // Disable button when status is 'completed'
+                >
+                    {status === "open" ? "open" : "completed"}
+                </Button>
+            </Box>
+        </Box>
+    );
+}
